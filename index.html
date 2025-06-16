@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <title>Mini Notes App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="JS/script.js" defer></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+   
+</head>
+<body class="bg-transparent transition-colors duration-300 scroll-smooth">
+    <!-- Login Screen -->
+<div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Login Card -->
+        <div id="loginCard" class="modal-content rounded-2xl p-8 text-center">
+            <div class="mb-8">
+                <div class="text-6xl mb-4 bounce-in">🔐</div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+                    Mini Notes
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400">Connectez-vous pour accéder à vos notes</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-4">
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Nom d'utilisateur
+                    </label>
+                    <input type="text" id="loginUsername" required 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="Entrez votre nom d'utilisateur">
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Mot de passe
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="loginPassword" required 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 pr-12"
+                               placeholder="Entrez votre mot de passe">
+                        <button type="button" id="toggleLoginPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="loginError" class="text-red-500 text-sm hidden"></div>
+                
+                <button type="submit" class="btn-primary w-full py-3 text-white rounded-xl font-medium">
+                    🚀 Se connecter
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Pas encore de compte ?</p>
+                <button id="showRegister" class="btn-secondary px-6 py-2 text-purple-600 dark:text-purple-400 rounded-lg font-medium">
+                    Créer un compte
+                </button>
+            </div>
+        </div>
+
+        <!-- Register Card -->
+        <div id="registerCard" class="modal-content rounded-2xl p-8 text-center hidden">
+            <div class="mb-8">
+                <div class="text-6xl mb-4 bounce-in">✨</div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+                    Créer un compte
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400">Rejoignez Mini Notes dès aujourd'hui</p>
+            </div>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="space-y-4">
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Nom d'utilisateur
+                    </label>
+                    <input type="text" id="registerUsername" required 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="Choisissez un nom d'utilisateur">
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Email (optionnel)
+                    </label>
+                    <input type="email" id="registerEmail" 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="votre@email.com">
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Mot de passe
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="registerPassword" required 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 pr-12"
+                               placeholder="Créez un mot de passe sécurisé">
+                        <button type="button" id="toggleRegisterPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                        Minimum 6 caractères
+                    </div>
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Confirmer le mot de passe
+                    </label>
+                    <input type="password" id="confirmPassword" required 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="Confirmez votre mot de passe">
+                </div>
+                
+                <div id="registerError" class="text-red-500 text-sm hidden"></div>
+                <div id="registerSuccess" class="text-green-500 text-sm hidden"></div>
+                
+                <button type="submit" class="btn-primary w-full py-3 text-white rounded-xl font-medium">
+                    ✨ Créer mon compte
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Déjà un compte ?</p>
+                <button id="showLogin" class="btn-secondary px-6 py-2 text-purple-600 dark:text-purple-400 rounded-lg font-medium">
+                    Se connecter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="min-h-screen hidden" id="mainApp">
+        <!-- Header -->
+        <header class="header-gradient sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center space-x-4 fade-in-up">
+                <div class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    📝 Mini Notes
+                </div>
+                <span class="text-sm text-gray-600 dark:text-gray-300 pulse-animation" id="noteCount">0 notes</span>
+            </div>
+            <div class="flex items-center space-x-4 slide-in-right">
+    <div class="flex items-center space-x-3">
+        <span class="text-sm text-gray-600 dark:text-gray-300">
+            👋 <span id="currentUser" class="font-medium"></span>
+        </span>
+        <button id="logoutBtn" class="btn-secondary px-3 py-2 text-sm text-gray-600 dark:text-gray-400 rounded-lg">
+            🚪 Déconnexion
+        </button>
+    </div>
+    <button id="compareBtn" class="btn-primary px-4 py-2 text-sm text-white rounded-lg hidden">
+        ✨ Comparer
+    </button>
+    <button id="themeToggle" class="theme-toggle p-3 rounded-xl transition-all duration-300">
+        <span class="dark:hidden text-xl">🌙</span>
+        <span class="hidden dark:inline text-xl">☀️</span>
+    </button>
+</div>
+        </div>
+    </div>
+</header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Controls -->
+            <div class="mb-8 space-y-4 fade-in-up">
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <input type="text" id="searchInput" placeholder="Rechercher par titre, contenu ou tag..." 
+                   class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400">
+        </div>
+        <div class="flex gap-3">
+            <select id="sortSelect" class="input-glass px-4 py-3 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <option value="date-desc">📅 Plus récent</option>
+                <option value="date-asc">📅 Plus ancien</option>
+                <option value="title-asc">🔤 A-Z</option>
+                <option value="title-desc">🔤 Z-A</option>
+            </select>
+            <button id="addNoteBtn" class="btn-primary px-6 py-3 text-white rounded-xl font-medium">
+                ✨ Nouvelle note
+            </button>
+        </div>
+    </div>
+</div>
+
+            <!-- Notes Grid -->
+            <div id="notesContainer" class="note-grid">
+    <!-- Notes will be inserted here -->
+</div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state mx-auto max-w-md hidden">
+    <div class="text-8xl mb-6 bounce-in">📝</div>
+    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Aucune note trouvée</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg">Commencez par créer votre première note et laissez libre cours à votre créativité</p>
+    <button onclick="openNoteModal()" class="btn-primary px-8 py-4 text-white rounded-xl font-medium text-lg">
+        🚀 Créer une note
+    </button>
+</div>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="noteModal" class="modal-backdrop fixed inset-0 hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="modalTitle" class="text-xl font-semibold text-gray-900 dark:text-white">Nouvelle note</h2>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="noteForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Titre</label>
+                        <input type="text" id="noteTitle" required 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Contenu 
+                            <span class="text-xs text-gray-500">(Markdown supporté: **gras**, *italique*, `code`)</span>
+                        </label>
+                        <textarea id="noteContent" rows="8" required
+                                  class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Tags <span class="text-xs text-gray-500">(séparés par des espaces, ex: #javascript #web)</span>
+                        </label>
+                        <input type="text" id="noteTags" 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400">
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" id="cancelBtn" class="btn-secondary px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 rounded-lg">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn-primary px-6 py-3 text-white rounded-xl font-medium">
+                            Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compare Modal -->
+    <div id="compareModal" class="modal-backdrop fixed inset-0 hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Comparaison de notes</h2>
+                    <button id="closeCompareModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="compareContent">
+                    <!-- Comparison content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal-backdrop fixed inset-0 hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content rounded-2xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Supprimer la note</h3>
+                        <p class="text-gray-500 dark:text-gray-400">Cette action est irréversible.</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button id="cancelDelete" class="btn-secondary px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 rounded-lg">
+                        Annuler
+                    </button>
+                    <button id="confirmDelete" class="btn-primary px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                        Supprimer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="floatingAdd" class="floating-action" onclick="openNoteModal()">
+    +
+</button>
+</body>
+</html>
