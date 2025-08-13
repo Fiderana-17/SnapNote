@@ -282,5 +282,25 @@
         </div>
     </div>
 
+    <!-- Compare Modal -->
+    <div id="compareModal" class="modal-backdrop fixed inset-0 hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Comparaison de notes</h2>
+                    <button id="closeCompareModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="compareContent">
+                    <!-- Comparison content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
