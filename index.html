@@ -190,6 +190,33 @@
     </div>
 </header>
 
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Controls -->
+            <div class="mb-8 space-y-4 fade-in-up">
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <input type="text" id="searchInput" placeholder="Rechercher par titre, contenu ou tag..." 
+                   class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400">
+        </div>
+        <div class="flex gap-3">
+            <select id="sortSelect" class="input-glass px-4 py-3 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <option value="date-desc">📅 Plus récent</option>
+                <option value="date-asc">📅 Plus ancien</option>
+                <option value="title-asc">🔤 A-Z</option>
+                <option value="title-desc">🔤 Z-A</option>
+            </select>
+            <button id="addNoteBtn" class="btn-primary px-6 py-3 text-white rounded-xl font-medium">
+                ✨ Nouvelle note
+            </button>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
