@@ -229,6 +229,58 @@
         🚀 Créer une note
     </button>
 </div>
+</div>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="noteModal" class="modal-backdrop fixed inset-0 hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="modalTitle" class="text-xl font-semibold text-gray-900 dark:text-white">Nouvelle note</h2>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="noteForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Titre</label>
+                        <input type="text" id="noteTitle" required 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Contenu 
+                            <span class="text-xs text-gray-500">(Markdown supporté: **gras**, *italique*, `code`)</span>
+                        </label>
+                        <textarea id="noteContent" rows="8" required
+                                  class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Tags <span class="text-xs text-gray-500">(séparés par des espaces, ex: #javascript #web)</span>
+                        </label>
+                        <input type="text" id="noteTags" 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400">
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" id="cancelBtn" class="btn-secondary px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 rounded-lg">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn-primary px-6 py-3 text-white rounded-xl font-medium">
+                            Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
