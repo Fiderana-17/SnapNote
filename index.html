@@ -93,6 +93,63 @@
                 <p class="text-gray-600 dark:text-gray-400">Rejoignez SnapNote dès aujourd'hui</p>
             </div>
 
+             <!-- Register Form -->
+            <form id="registerForm" class="space-y-4">
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Nom d'utilisateur
+                    </label>
+                    <input type="text" id="registerUsername" required 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="Choisissez un nom d'utilisateur">
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Email (optionnel)
+                    </label>
+                    <input type="email" id="registerEmail" 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="votre@email.com">
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Mot de passe
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="registerPassword" required 
+                               class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 pr-12"
+                               placeholder="Créez un mot de passe sécurisé">
+                        <button type="button" id="toggleRegisterPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                        Minimum 6 caractères
+                    </div>
+                </div>
+                
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Confirmer le mot de passe
+                    </label>
+                    <input type="password" id="confirmPassword" required 
+                           class="input-glass w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                           placeholder="Confirmez votre mot de passe">
+                </div>
+                
+                <div id="registerError" class="text-red-500 text-sm hidden"></div>
+                <div id="registerSuccess" class="text-green-500 text-sm hidden"></div>
+                
+                <button type="submit" class="btn-primary w-full py-3 text-white rounded-xl font-medium">
+                    ✨ Créer mon compte
+                </button>
+            </form>
+
 </div>
 
 </body>
