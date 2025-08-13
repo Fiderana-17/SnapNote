@@ -5,6 +5,124 @@ constructor() {
     this.initializeAuth();
 }
 
+initializeAuth() {
+    // Check if user is already logged in
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+        this.currentUser = JSON.parse(savedUser);
+        this.showMainApp();
+    } else {
+        this.showLoginScreen();
+    }
+
+    this.initializeAuthEventListeners();
+}
+
+initializeAuthEventListeners() {
+    // Login form
+    document.getElementById('loginForm').addEventListener('submit', (e) => this.handleLogin(e));
+    document.getElementById('registerForm').addEventListener('submit', (e) => this.handleRegister(e));
+    
+    // Switch between login and register
+    document.getElementById('showRegister').addEventListener('click', () => this.showRegisterForm());
+    document.getElementById('showLogin').addEventListener('click', () => this.showLoginForm());
+    
+    // Password toggle
+    document.getElementById('toggleLoginPassword').addEventListener('click', () => this.togglePassword('loginPassword'));
+    document.getElementById('toggleRegisterPassword').addEventListener('click', () => this.togglePassword('registerPassword'));
+    
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+}
+
+loadUsers() {
+    const saved = localStorage.getItem('users');
+    return saved ? JSON.parse(saved) : [];
+}
+
+saveUsers() {
+    localStorage.setItem('users', JSON.stringify(this.users));
+}
+
+showLoginScreen() {
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+}
+
+showMainApp() {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('mainApp').classList.remove('hidden');
+    document.getElementById('currentUser').textContent = this.currentUser.username;
+    
+    // Initialize the notes app ou recharger les notes si l'app existe déjà
+    if (!window.notesApp) {
+        window.notesApp = new NotesApp();
+    } else {
+        // Recharger les notes pour le nouvel utilisateur
+        window.notesApp.notes = window.notesApp.loadNotes();
+        window.notesApp.renderNotes();
+    }
+}
+
+showLoginForm() {
+    document.getElementById('loginCard').classList.remove('hidden');
+    document.getElementById('registerCard').classList.add('hidden');
+    this.clearErrors();
+}
+
+showRegisterForm() {
+    document.getElementById('loginCard').classList.add('hidden');
+    document.getElementById('registerCard').classList.remove('hidden');
+    this.clearErrors();
+}
+
+togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+    input.setAttribute('type', type);
+}
+
+clearErrors() {
+    document.getElementById('loginError').classList.add('hidden');
+    document.getElementById('registerError').classList.add('hidden');
+    document.getElementById('registerSuccess').classList.add('hidden');
+}
+
+showError(elementId, message) {
+    const element = document.getElementById(elementId);
+    element.textContent = message;
+    element.classList.remove('hidden');
+}
+
+showSuccess(elementId, message) {
+    const element = document.getElementById(elementId);
+    element.textContent = message;
+    element.classList.remove('hidden');
+}
+
+handleLogin(e) {
+    e.preventDefault();
+    this.clearErrors();
+
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if (!username || !password) {
+        this.showError('loginError', 'Veuillez remplir tous les champs');
+        return;
+    }
+
+    const user = this.users.find(u => u.username === username && u.password === password);
+    
+    if (user) {
+        this.currentUser = user;
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.showMainApp();
+    } else {
+        this.showError('loginError', 'Nom d\'utilisateur ou mot de passe incorrect');
+    }
+}
+
 handleRegister(e) {
     e.preventDefault();
     this.clearErrors();
@@ -61,7 +179,20 @@ handleRegister(e) {
         this.showLoginForm();
     }, 2000);
 }
-    class NotesApp {
+
+logout() {
+    this.currentUser = null;
+    localStorage.removeItem('currentUser');
+    this.showLoginScreen();
+    
+    // Clear forms
+    document.getElementById('loginForm').reset();
+    document.getElementById('registerForm').reset();
+    this.clearErrors();
+}
+}
+
+class NotesApp {
 constructor() {
     this.notes = this.loadNotes();
     this.currentNoteId = null;
@@ -437,4 +568,12 @@ saveNotes() {
         }
     }
 
+    // Initialize the auth manager
+const authManager = new AuthManager();
+
+// Global functions for inline event handlers
+window.openNoteModal = () => {
+if (window.notesApp) {
+    window.notesApp.openNoteModal();
 }
+};
