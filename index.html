@@ -159,6 +159,37 @@
         </div>
 </div>
         <div class="min-h-screen hidden" id="mainApp"></div>
+         <!-- Header -->
+        <header class="header-gradient sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center space-x-4 fade-in-up">
+                <div class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <a href="landing.html">📝 SnapNote</a>  
+                 </div>
+                <span class="text-sm text-gray-600 dark:text-gray-300 pulse-animation" id="noteCount">0 notes</span>
+            </div>
+            <div class="flex items-center space-x-4 slide-in-right">
+    <div class="flex items-center space-x-3">
+        <span class="text-sm text-gray-600 dark:text-gray-300">
+            👋 <span id="currentUser" class="font-medium"></span>
+        </span>
+        <button id="logoutBtn" class="btn-secondary px-3 py-2 text-sm text-gray-600 dark:text-gray-400 rounded-lg">
+            🚪 Déconnexion
+        </button>
+    </div>
+    <button id="compareBtn" class="btn-primary px-4 py-2 text-sm text-white rounded-lg hidden">
+        ✨ Comparer
+    </button>
+    <button id="themeToggle" class="theme-toggle p-3 rounded-xl transition-all duration-300">
+        <span class="dark:hidden text-xl">🌙</span>
+        <span class="hidden dark:inline text-xl">☀️</span>
+    </button>
+</div>
+        </div>
+    </div>
+</header>
+
 
 </body>
 </html>
