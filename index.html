@@ -7,7 +7,7 @@
     <title>SnapNote</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="JS/script.js" defer></script>
-      <script>
+    <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -24,7 +24,6 @@
             }
         }
     </script>
-
    
 </head>
 <body class="bg-transparent transition-colors duration-300 scroll-smooth">
@@ -75,16 +74,16 @@
                     🚀 Se connecter
                 </button>
             </form>
-
-             <div class="mt-6 text-center">
+            
+            <div class="mt-6 text-center">
                 <p class="text-gray-600 dark:text-gray-400 mb-4">Pas encore de compte ?</p>
                 <button id="showRegister" class="btn-secondary px-6 py-2 text-purple-600 dark:text-purple-400 rounded-lg font-medium">
                     Créer un compte
                 </button>
-            </div>         
-    </div>
+            </div>
+        </div>
 
-     <!-- Register Card -->
+        <!-- Register Card -->
         <div id="registerCard" class="modal-content rounded-2xl p-8 text-center hidden">
             <div class="mb-8">
                 <div class="text-6xl mb-4 bounce-in">✨</div>
@@ -94,7 +93,7 @@
                 <p class="text-gray-600 dark:text-gray-400">Rejoignez SnapNote dès aujourd'hui</p>
             </div>
 
-             <!-- Register Form -->
+            <!-- Register Form -->
             <form id="registerForm" class="space-y-4">
                 <div class="text-left">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -150,16 +149,18 @@
                     ✨ Créer mon compte
                 </button>
             </form>
-
+            
             <div class="mt-6 text-center">
                 <p class="text-gray-600 dark:text-gray-400 mb-4">Déjà un compte ?</p>
                 <button id="showLogin" class="btn-secondary px-6 py-2 text-purple-600 dark:text-purple-400 rounded-lg font-medium">
                     Se connecter
                 </button>
+            </div>
         </div>
+    </div>
 </div>
-        <div class="min-h-screen hidden" id="mainApp"></div>
-         <!-- Header -->
+    <div class="min-h-screen hidden" id="mainApp">
+        <!-- Header -->
         <header class="header-gradient sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
@@ -216,11 +217,13 @@
         </div>
     </div>
 </div>
-                <!-- Notes Grid -->
+
+            <!-- Notes Grid -->
             <div id="notesContainer" class="note-grid">
     <!-- Notes will be inserted here -->
 </div>
-           <!-- Empty State -->
+
+            <!-- Empty State -->
             <div id="emptyState" class="empty-state mx-auto max-w-md hidden">
     <div class="text-8xl mb-6 bounce-in">📝</div>
     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Aucune note trouvée</h3>
@@ -229,7 +232,7 @@
         🚀 Créer une note
     </button>
 </div>
-</div>
+        </div>
     </div>
 
     <!-- Note Modal -->
@@ -302,7 +305,7 @@
         </div>
     </div>
 
-     <!-- Delete Confirmation Modal -->
+    <!-- Delete Confirmation Modal -->
     <div id="deleteModal" class="modal-backdrop fixed inset-0 hidden z-50 flex items-center justify-center p-4">
         <div class="modal-content rounded-2xl max-w-md w-full">
             <div class="p-6">
@@ -332,6 +335,5 @@
     <button id="floatingAdd" class="floating-action" onclick="openNoteModal()">
     +
 </button>
-
 </body>
 </html>
